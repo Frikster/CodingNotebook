@@ -10,10 +10,10 @@
 # of each denomination.
 
 # simply modify as below commented out to make this work for returning the one with the least amount of coins
+# TODO: Redo bottom-up (i.e. this conceptually is a 2D array with (value,idx))
 def make_better_change_better(value, idx=0, coins=[1,5,10,25], memo={}):
     if (value,idx) in memo: return memo[(value, idx)]
     if value <= 0 or idx>=len(coins): return [[]]
-    # coins = list(filter(lambda c: c <= value, coins))
     res = []
     coin = coins[idx] 
     branches = value // coin  # max number of times we can pick this coin.

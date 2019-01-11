@@ -10,6 +10,7 @@
 # My solution used 3 method parameters: current_row, taken_columns, and
 # positions so far
 
+# TODO: Grok eight-queens
 # also works and don't get it:
 GRID_SIZE = 8
 
