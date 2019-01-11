@@ -9,6 +9,8 @@
 # for the best change, we assure that we test for 'non-greedy' uses
 # of each denomination.
 
+import pdb
+
 # simply modify as below commented out to make this work for returning the one with the least amount of coins
 # TODO: Redo bottom-up (i.e. this conceptually is a 2D array with (value,idx))
 def make_better_change_better(value, idx=0, coins=[1,5,10,25], memo={}):
@@ -20,6 +22,7 @@ def make_better_change_better(value, idx=0, coins=[1,5,10,25], memo={}):
     while branches >= 0:
         if coin <= value:
             combos_without_coin = make_better_change_better(value-branches*coin, idx+1, coins, memo)
+            print(combos_without_coin)
             for combo in combos_without_coin:
                 res.append(branches*[coin] + combo)
         branches -= 1
