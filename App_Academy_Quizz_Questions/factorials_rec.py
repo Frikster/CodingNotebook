@@ -36,7 +36,7 @@ class Factorial:
   def factorial(self, num):
     # return 1 if n == 1 || n == 2
     # Check our cache instead of the original base case
-    if self.cache.get(num, False): return self.cache[num]
+    if num in self.cache: return self.cache[num]
 
     # Record our answer in our cache before returning it
     ans = (num-1) * self.factorial(num - 1)

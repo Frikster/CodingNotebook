@@ -8,7 +8,7 @@
 import pdb
 # from functools import lru_cache
 
-# Top-down - gives the weight-value pairs chosen. Simply iterate through to get total value
+# Top-down - gives the weight-value pairs chosen. Simply iterate through returned values to get total value
 class Knapsack:
     def __init__(self):
         self.cache = {}

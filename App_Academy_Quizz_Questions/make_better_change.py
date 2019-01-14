@@ -12,22 +12,49 @@
 import pdb
 
 # simply modify as below commented out to make this work for returning the one with the least amount of coins
-# TODO: Redo bottom-up (i.e. this conceptually is a 2D array with (value,idx))
-def make_better_change_better(value, idx=0, coins=[1,5,10,25], memo={}):
-    if (value,idx) in memo: return memo[(value, idx)]
-    if value <= 0 or idx>=len(coins): return [[]]
-    res = []
-    coin = coins[idx] 
-    branches = value // coin  # max number of times we can pick this coin.
-    while branches >= 0:
-        if coin <= value:
-            combos_without_coin = make_better_change_better(value-branches*coin, idx+1, coins, memo)
-            print(combos_without_coin)
-            for combo in combos_without_coin:
-                res.append(branches*[coin] + combo)
-        branches -= 1
-    memo[(value, idx)] = res
-    return res
+class MakeChange:
+    def __init__(self):
+        self.cache = {}
+
+    def make_better_change_better(self, value, idx=0, coins=[1,5,10,25]):
+        if (value,idx) in self.cache: return self.cache[(value, idx)]
+        if value <= 0 or idx>=len(coins): return [[]]
+        res = []
+        coin = coins[idx] 
+        branches = value // coin  # max number of times we can pick this coin.
+        while branches >= 0:
+            if coin <= value:
+                combos_without_coin = self.make_better_change_better(value-branches*coin, idx+1, coins)
+                for combo in combos_without_coin:
+                    res.append(branches*[coin] + combo)
+            branches -= 1
+        self.cache[(value, idx)] = res
+        return res
+
+# Bottom-up 
+def make_better_change_better(value, coins=[1,5,10,25]):
+    if value == 0: return []
+    cache = make_better_change_cache_builder(value, coins, 0)
+    return cache[(value, len(coins)-1)]
+
+
+def make_better_change_cache_builder(value, coins, idx=0):
+    cache = {}
+    for idx in range(len(coins)):
+        for value in range(value+1):
+            coin = coins[idx]
+            branches = value // coin 
+            if value == 0:
+                cache[(value, idx)] = []
+            elif idx == 0:
+                cache[(value, idx)] = [[coin]*branches]
+            elif coin > value:
+                cache[(value, idx)] = cache[(value, idx - 1)]
+            else:
+                cache[(value, idx)] = cache[(value, idx - 1)]
+                for combo in cache[(value - coin, idx)]:
+                    cache[(value, idx)].append(combo + [coin])       
+    return cache
 
 # less optimized than the one above. Computes all possible subsets but only returns one valid coin combo for each due to the use of sets
 def make_better_change(value, coins, memo={}):
@@ -90,9 +117,10 @@ def make_change(value, coins):
     # return sorted(solutions, key=lambda arr: len(arr))[0]
 
 
-print(len(make_better_change(24, [1, 5, 10, 25])))
-print((make_better_change(24, [1, 5, 10, 25])))
-print(coin_representations(24))
+# print(len(make_better_change(24, [1, 5, 10, 25])))
+# print((make_better_change(24, [1, 5, 10, 25])))
+# print(coin_representations(24))
+print(MakeChange().make_better_change_better(24))
 print(make_better_change_better(24))
 
 # print(make_better_change(24, [10, 7, 1]))
