@@ -7,6 +7,8 @@
  #   [0, 2] before [1, 2] (smaller first elements come first)
  #   [0, 1] before [0, 2] (then smaller second elements come first)
 
+# TODO: redo after doing windowed max range
+
 def two_sum(arr):
     res = []
     for idx in range(len(arr)):
