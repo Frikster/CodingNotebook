@@ -19,7 +19,7 @@ def two_sum(arr, target_sum):
         complement_idxs[el] = idx
     return res
 
-
+# NOTE: I am not convinced this is correct because we are iterating through every element in the array O(N) and every possible combination in two_sum_hash which in the worst case is O(N^2). So the algorithm as written is actually O(N^3) is it not?
 # O(n^2) time complexity (as opposed to O(n^4) brute force)
 # O(n^2) space complexity
 
