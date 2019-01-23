@@ -1,5 +1,6 @@
 from .static_array import StaticArray
 
+# Methods missing can be found in ring_buffer
 class DynamicArray:
     def __init__(self):
         self._store = StaticArray(8)
@@ -58,5 +59,3 @@ class DynamicArray:
             newStore[idx] = self[idx]
         self._capacity *= 2
         self._store = newStore
-
-
