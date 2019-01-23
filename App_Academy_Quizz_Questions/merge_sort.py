@@ -12,7 +12,7 @@ def merge(left, right, key=None):
     res = []
     while len(left) > 0 and len(right) > 0:
       if key(left[0], right[0]) == -1:
-       res.append(left.pop(0))
+       res.append(left.pop(0)) #TODO: This is O(n) and has to be fixed...
       else:
        res.append(right.pop(0))
     return res + left + right
