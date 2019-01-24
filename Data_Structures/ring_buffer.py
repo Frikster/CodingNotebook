@@ -1,5 +1,6 @@
 # TODO: Test
-from .static_array import StaticArray
+from static_array import StaticArray
+import pdb
 
 class RingBuffer:
     def __init__(self, capacity = 8):
@@ -91,3 +92,7 @@ class RingBuffer:
             new_store[idx] = el
         self.store = new_store
         self.start_idx = 0
+
+rb = RingBuffer()
+rb.append(1)
+print(str(rb))

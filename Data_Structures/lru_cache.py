@@ -1,6 +1,6 @@
 # TODO: Test
-from .linked_list import LinkedList, Node
-from .hash_map import HashMap
+from linked_list import LinkedList, Node
+from hash_map import HashMap
 
 class LRUCache:
     def __init__(self, cache_size):
