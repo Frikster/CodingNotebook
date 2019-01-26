@@ -63,7 +63,6 @@ class BinaryMinHeap:
     
     return array
   
-
 heap = BinaryMinHeap()
 heap.push(7)
 heap.push(5)
