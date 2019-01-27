@@ -20,44 +20,45 @@ Constraints:
 1 ≤ str.length ≤ 500
 [output] string'''
 
+
 def get_shortest_unique_substring(arr, str):
-    counter_hash = {}
-    for char in arr:
-        counter_hash[char] = 0
+  counter_hash = {}  # keeps track of how many of each character is in the current window
+  for char in arr:
+    counter_hash[char] = 0
 
-    front = 0
-    back = 0
-    counter = 0
+  front = 0
+  back = 0
+  unique_counter = 0  # keeps track of how many unique elements in window that are in arr
 
-    stored_front = float('inf')
-    stored_back = float('-inf')
+  # keep track of a candidate window. Store it and keep searching. If better one found, replace this one.
+  stored_front = float('inf')
+  stored_back = float('-inf')
 
-    while front < len(str):
-        print(str[front])
-        print(counter_hash.get(str[front], -1) >= 0)
+  while front < len(str):
+    print(str[back:front])
+    if str[front] in counter_hash:
+      if counter_hash[str[front]] == 0:
+        unique_counter += 1
+      counter_hash[str[front]] += 1
+    front += 1
 
-        if counter_hash.get(str[front], -1) >= 0:
-            print(counter_hash[char])
-            if counter_hash[char] == 0:
-                counter += 1
-            counter_hash[char] += 1
-        front += 1
+    while unique_counter >= len(arr):
+      if stored_front - stored_back > front - back:
+        stored_front = front
+        stored_back = back
 
-        while counter >= len(arr):
-            if stored_front - stored_back > front - back:
-                stored_front = front
-                stored_back = back
+      if str[back] in counter_hash:
+        # move back forward therefore remove char at back of window
+        counter_hash[str[back]] -= 1
+        if counter_hash[str[back]] == 0:
+          unique_counter -= 1
 
-            if counter_hash.get(str[back], -1) >= 0:
-                counter_hash[str[back]] -= 1
-                if counter_hash[str[back]] == 0:
-                    counter -= 1
+      back += 1
 
-            back += 1
-
-    if stored_front == float('inf') or stored_back == float('-inf'):
-        return ""
-    return str[stored_back:stored_front + 1]
+  if stored_front == float('inf') or stored_back == float('-inf'):
+    return ""
+  return str[stored_back:stored_front]
 
 
+print(get_shortest_unique_substring(['A', 'B', 'C'], "ADBCQWERTY"))
 get_shortest_unique_substring(["A", "B", "C"], "ADOBECODEBANCDDD")
