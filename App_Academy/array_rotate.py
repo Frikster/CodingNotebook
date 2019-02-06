@@ -8,15 +8,18 @@
 #     return dupe
 
 def my_rotate(arr, num=1):
+    # arr = arr.copy() if needed
     # reverse segment in place
     def reverse_segment(start, end):
+        end -= 1
         while start < end:
             arr[start], arr[end] = arr[end], arr[start]
             start += 1
             end -= 1
     rotations = num % len(arr)
-    reverse_segment(0, len(arr) - 1)
-    reverse_segment(0, len(arr) - rotations - 1)
+    reverse_segment(0, len(arr))
+    reverse_segment(len(arr) - rotations, len(arr))
+    reverse_segment(0, len(arr) - rotations)
     return arr
 
 print(my_rotate([1, 2, 3, 4, 5]))

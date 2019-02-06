@@ -26,5 +26,6 @@ def my_controlled_flatten(arr, n):
     return res
 
 
-my_flatten([1, [2, 3], [4, [5]]]) == [1, 2, 3, 4, 5]
-my_controlled_flatten([1, [2, 3], [4, [5]]], 1) == [1, 2, 3, 4, [5]]
+print(my_flatten([1, [2, 3], [4, [5]]]) == [1, 2, 3, 4, 5])
+print(my_controlled_flatten([1, [2, 3], [4, [5]]], 1) == [1, 2, 3, 4, [5]])
+print(my_controlled_flatten([1, [2, 3], [4, [5]]], 4))

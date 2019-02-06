@@ -8,16 +8,13 @@
 # To get an array of letters "a" to "z", you may use `("a".."z").to_a`. To find
 # the position of a letter in the array, you may use `Array#find_index`.
 
-
+# TODO: redo using suboptimal method using alphabet array that you index into to
+# make sure you remember ['a','b',...'z'].index(element)
 def caesar_cipher(string, shift):
-  return ''.join(list(map(lambda c: 
-    chr(ord('a') + (ord(c) - ord('a') + shift) % 26)
-    if c != " "
-    else " ",
-    string)))
+  return ''.join([chr(ord('a') + (ord(c) - ord('a') + shift) % 26)
+   if c != " " else " " for c in string])
 
-
-caesar_cipher('This is my cat', 3)
+print(caesar_cipher('This is my cat', 3))
 #'qklv lv pb fdw'
-caesar_cipher('abcdefg', 1)
+print(caesar_cipher('abcdefg', 1))
 #'bcdefgh'

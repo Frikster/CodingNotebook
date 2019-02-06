@@ -1,11 +1,11 @@
-from Data_Structures.heap import BinaryMinHeap
-
 # heap_sort! method. This method should not create a new array. 
 # It should start by heapifying the array in place. Once the items have been heapified, 
 # use the ::heapify_down method to extract items from the heap one by one, moving them past a partition in the array. 
 # Voila! Your array has been heap sorted.
 
 # What is the time complexity of HeapSort? O(nlogn) What is the space complexity? O(1) since in-place
+
+from Data_Structures.heap import BinaryMinHeap
 
 def heap_sort_in_place(arr, key = None):
     key = key or (lambda a,b: -1 if b < a else 1 if b > a else 0)
@@ -14,10 +14,11 @@ def heap_sort_in_place(arr, key = None):
 
     for idx in range(len(arr)):
         BinaryMinHeap.heapify_up(arr, idx, idx+1, key)
+    # At this point our arr has been transformed into a reversed MinHeap in place
     for idx in range(len(arr)-1,0,-1):
         arr[0], arr[idx] = arr[idx], arr[0]
         BinaryMinHeap.heapify_down(arr, 0, idx, key)
-
+    # We could have also just have used the MinHeap with a normal key and then reversed the final result
     return arr
 
 

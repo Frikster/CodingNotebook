@@ -10,5 +10,5 @@ def jumble_sort(string, alphabet = None):
     alphabet = alphabet or [c for c in 'abcdefghijklmnopqrstuvwxyz']
     return ''.join(sorted(string, key=lambda el: alphabet.index(el)))
 
-jumble_sort("hello") == "ehllo"
-jumble_sort("hello", ['o', 'l', 'h', 'e']) == 'ollhe'
+print(jumble_sort("hello") == "ehllo")
+print(jumble_sort("hello", ['o', 'l', 'h', 'e']) == 'ollhe')

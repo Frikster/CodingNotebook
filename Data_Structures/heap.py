@@ -6,6 +6,9 @@ class BinaryMinHeap:
     self.key = key
     self.store = []
   
+  def __len__(self):
+    return len(self.store)
+
   def extract(self):
     self.store[0], self.store[len(self.store) - 1] = self.store[len(self.store) - 1], self.store[0]
     val = self.store.pop()

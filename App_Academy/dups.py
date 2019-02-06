@@ -12,4 +12,4 @@ def dups(arr):
             res[el] = [idx]
     return {k:v for k,v in res.items() if len(v) > 1}
 
-dups([1, 3, 4, 3, 0, 3, 0]) == {0: [4, 6], 3: [1, 3, 5]}
+print(dups([1, 3, 4, 3, 0, 3, 0]) == {0: [4, 6], 3: [1, 3, 5]})
