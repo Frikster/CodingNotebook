@@ -2,41 +2,46 @@
 # make_better_change(24, [10,7,1]) should return [10,7,7]
 # make change with the fewest number of coins
 
-# To make_better_change, we only take one coin at a time and
-# never rule out denominations that we've already used.
+# write make_better_change(value, coins) that returns an array of arrays which are all the possible
+# combinations of coins that sum to value. Never rule out denominations that we've already used.
 # This allows each coin to be available each time we get a new remainder.
-# By iterating over the denominations and continuing to search
-# for the best change, we assure that we test for 'non-greedy' uses
-# of each denomination.
+# By iterating over the denominations and continuing to search for the best change, we assure that we test
+# for 'non-greedy' uses of each denomination
+
+# e.g. make_better_change(24, [1,5,10,25]) will return 
+# [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 
+# [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5], 
+# [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5], [1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5], 
+# [1, 1, 1, 1, 5, 5, 5, 5], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10], [1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 10], 
+# [1, 1, 1, 1, 5, 5, 10], [1, 1, 1, 1, 10, 10]]
 
 import pdb
 
-# simply modify as below commented out to make this work for returning the one with the least amount of coins
+# Top-down: simply modify to return the array with the fewest coins if that is what you desire
 class MakeChange:
     def __init__(self):
         self.cache = {}
 
-    def make_better_change_better(self, value, idx=0, coins=[1,5,10,25]):
-        if (value,idx) in self.cache: return self.cache[(value, idx)]
-        if value <= 0 or idx>=len(coins): return [[]]
-        res = []
-        coin = coins[idx] 
+    def make_better_change_better(self, value, coins, idx=0):
+        if (value, idx) in self.cache: return self.cache[(value, idx)]
+        if value <= 0 or idx >= len(coins): return []
+        coin = coins[idx]
         branches = value // coin  # max number of times we can pick this coin.
+        res = [branches*[coin]] if branches * coin == value else []
         while branches >= 0:
-            if coin <= value:
-                combos_without_coin = self.make_better_change_better(value-branches*coin, idx+1, coins)
-                for combo in combos_without_coin:
-                    res.append(branches*[coin] + combo)
+            combos_without_coins = self.make_better_change_better(value-(branches*coin), coins, idx+1)
+            for combo in combos_without_coins:
+                res.append(branches*[coin] + combo)
             branches -= 1
         self.cache[(value, idx)] = res
         return res
 
 # Bottom-up 
-def make_better_change_better(value, coins=[1,5,10,25]):
+def make_better_change_better(value, coins):
     if value == 0: return []
+    coins.sort() # o/w you will build from the largest and might get combos that don't sum to value
     cache = make_better_change_cache_builder(value, coins, 0)
     return cache[(value, len(coins)-1)]
-
 
 def make_better_change_cache_builder(value, coins, idx=0):
     cache = {}
@@ -44,7 +49,7 @@ def make_better_change_cache_builder(value, coins, idx=0):
         for value in range(value+1):
             coin = coins[idx]
             branches = value // coin 
-            if value == 0:
+            if value <= 0:
                 cache[(value, idx)] = []
             elif idx == 0:
                 cache[(value, idx)] = [[coin]*branches]
@@ -53,7 +58,13 @@ def make_better_change_cache_builder(value, coins, idx=0):
             else:
                 cache[(value, idx)] = cache[(value, idx - 1)]
                 for combo in cache[(value - coin, idx)]:
-                    cache[(value, idx)].append(combo + [coin])       
+                    cache[(value, idx)].append(combo + [coin])  
+                # Also consider the case where no prior coins are used   
+                # You have to check if this is already in the cache because for instance
+                # It might have been added when the value was the same but for a priod idx
+                # when the coin at the prior idx couldn't be used 
+                if branches * coin == value and not [coin]*branches in cache[(value, idx)]:
+                    cache[(value, idx)].append([coin]*branches)
     return cache
 
 # less optimized than the one above. Computes all possible subsets but only returns one valid coin combo for each due to the use of sets
@@ -117,11 +128,22 @@ def make_change(value, coins):
     # return sorted(solutions, key=lambda arr: len(arr))[0]
 
 
+# Iterative works:
+print(make_better_change_better(24, [1, 5, 10, 25]))
+print(make_better_change_better(24, [10, 7, 1]))
+print(make_better_change_better(25, [10, 7, 1]))
+print(make_better_change_better(25, [10, 8, 7, 1]))
+
+# Recursive works:
+print(MakeChange().make_better_change_better(24, [1, 5, 10, 25]))
+print(MakeChange().make_better_change_better(24, [1, 7, 10]))
+print(MakeChange().make_better_change_better(25, [10, 7, 1]))
+print(MakeChange().make_better_change_better(25, [10, 8, 7, 1]))
+
+
 # print(len(make_better_change(24, [1, 5, 10, 25])))
 # print((make_better_change(24, [1, 5, 10, 25])))
 # print(coin_representations(24))
-print(MakeChange().make_better_change_better(24))
-print(make_better_change_better(24))
 
 # print(make_better_change(24, [10, 7, 1]))
 # print(len(make_better_change(24, [10, 7, 1])))
