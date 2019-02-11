@@ -3,7 +3,7 @@
 # Only packages that have dependencies will be listed, but all packages from 1..max_id exist.
 # N.B. this is how npm works.
 from Data_Structures.graph import Vertex, Edge
-from App_Academy_Quizz_Questions.topological_sort import topological_sort_khan
+from App_Academy.topological_sort import topological_sort_khan
 
 def install_order(arr):
     max_id = 0

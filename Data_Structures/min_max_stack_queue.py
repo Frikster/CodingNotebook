@@ -26,3 +26,6 @@ class MinMaxStackQueue:
 
     def min(self):
         return min(self.in_stack.min(), self.out_stack.min())
+
+    def __len__(self):
+        return len(self.in_stack) + len(self.out_stack)

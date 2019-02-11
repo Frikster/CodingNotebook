@@ -1,7 +1,8 @@
-# TODO: Test
-from static_array import StaticArray
-import pdb
+import unittest
+from Data_Structures.static_array import StaticArray
 
+# Can be modified so that instead of returning None it raises error for index out of bounds
+# And instead of doing nothing it raises error when popping from empty RingBuffer
 class RingBuffer:
     def __init__(self, capacity = 8):
         self.store = StaticArray(capacity)
@@ -15,7 +16,7 @@ class RingBuffer:
         return len(self.store)
 
     def __getitem__(self, idx):
-        if not -len(self) < idx < len(self): 
+        if not -len(self) <= idx < len(self): 
             return None
         if idx < 0:
             return self[len(self) + idx]
@@ -93,6 +94,40 @@ class RingBuffer:
         self.store = new_store
         self.start_idx = 0
 
-rb = RingBuffer()
-rb.append(1)
-print(str(rb))
+
+class Test(unittest.TestCase):
+    def test_ring_buffer(self):
+        rb = RingBuffer()
+        print(rb[0])
+        rb.shift()
+        rb.pop()
+        print(rb[0])
+        for _ in range(5):
+            rb.append(1)
+        print(str(rb))
+        for _ in range(4):
+            rb.pop()
+        print(str(rb))
+        for _ in range(5):
+            rb.unshift(5)
+        print(str(rb))
+        for _ in range(4):
+            rb.shift()
+        print(str(rb))
+        for _ in range(4):
+            rb.unshift(2)
+        for _ in range(4):
+            rb.append(3)
+        for _ in range(1):
+            rb.shift()
+        for _ in range(1):
+            rb.append(3)
+        print(str(rb))
+        
+        rb = RingBuffer()
+        rb.append(1)
+        rb.append(2)
+        print(rb.pop())
+
+if __name__ == "__main__":
+  unittest.main()

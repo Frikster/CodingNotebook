@@ -1,5 +1,5 @@
  # TODO: test
-
+import pdb
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -9,6 +9,7 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
     
+    # Note that root has to be set manually before insert works
     def insert(self, value, tree_node):
         if tree_node is None: return BSTNode(value)
         if value <= tree_node.value:
@@ -16,7 +17,9 @@ class BinarySearchTree:
         else:
             tree_node.right = self.insert(value, tree_node.right)
         return tree_node
-    
+
+    # You cannot set tree_node to default to self.root because then if it doesn't find the value
+    # on the next recursive level tree_node is none and then set to self.root -> infinite loop
     def find(self, value, tree_node):
         if tree_node is None: return None 
         if tree_node.value == value: return tree_node       
@@ -44,7 +47,9 @@ class BinarySearchTree:
         return abs(left_depth - right_depth) <= 1 and \
          self.is_balanced(tree_node.left) and self.is_balanced(tree_node.right)
 
-    def in_order_traversal(self, tree_node, arr=[]):
+    def in_order_traversal(self, tree_node, arr=None):
+        if arr is None: arr = []
+        if tree_node is None: return arr
         if tree_node.left:
             self.in_order_traversal(tree_node.left, arr)
         arr.append(tree_node.value)

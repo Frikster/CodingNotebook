@@ -8,13 +8,22 @@
 # To get an array of letters "a" to "z", you may use `("a".."z").to_a`. To find
 # the position of a letter in the array, you may use `Array#find_index`.
 
-# TODO: redo using suboptimal method using alphabet array that you index into to
-# make sure you remember ['a','b',...'z'].index(element)
+# Could potentially use a "alphabet" paramater and index + shift % length to get next element: ['a','b',...'z'].index(element)
+# def caesar_cipher(string, shift):
+#   return ''.join([chr(ord('a') + (ord(c) - ord('a') + shift) % 26)
+#    if c != " " else " " for c in string])
+
+
 def caesar_cipher(string, shift):
   return ''.join([chr(ord('a') + (ord(c) - ord('a') + shift) % 26)
-   if c != " " else " " for c in string])
+                  if c != " " else " " for c in string])
 
-print(caesar_cipher('This is my cat', 3))
-#'qklv lv pb fdw'
-print(caesar_cipher('abcdefg', 1))
+def caesar_cipher_alpha(string, shift, alphabet):
+  return ''.join([alphabet[(alphabet.index(c)+shift)%len(alphabet)] if c != " " else " " for c in string])
+
+
+print(caesar_cipher_alpha('This is my cat', 3, 'abcdefghijklmnopqrstuvwxyzTAX'))
+#'Aklv lv pb fdw'
+print(caesar_cipher_alpha('abcdefg', 1, 'abcdefghijklmnopqrstuvwxyz'))
 #'bcdefgh'
+print(caesar_cipher_alpha('!@)', 2, '!@#$%^&*()'))

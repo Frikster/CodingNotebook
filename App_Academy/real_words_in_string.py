@@ -2,12 +2,11 @@
  # dictionary argument. The method does NOT return any duplicates.
 
 def real_words_in_string(string, dictionary):
-    return list(filter(lambda w: w in string, dictionary))
+    return [w for w in dictionary if w in string]
 
-
-real_words_in_string("batcabtarbrat", ["cat", "car"])
+print(real_words_in_string("batcabtarbrat", ["cat", "car"]))
 #[]
 
 dictionary = ["bears", "ear", "a", "army"]
-real_words_in_string("erbearsweatmyajs", dictionary)
+print(real_words_in_string("erbearsweatmyajs", dictionary))
 # ["bears", "ear", "a"]

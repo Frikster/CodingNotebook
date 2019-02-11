@@ -10,8 +10,8 @@ class QuickSort:
             return arr
         key = key or (lambda a, b: -1 if a < b else 1 if a > b else 0)
         pivot = arr.pop(0)
-        left = list(filter(lambda el: key(el, pivot) == -1, arr))
-        right = list(filter(lambda el: key(el, pivot) != -1, arr))
+        left = [el for el in arr if key(el, pivot) == -1]
+        right = [el for el in arr if key(el, pivot) != -1]
         return self.sort1(left, key) + [pivot] + self.sort1(right, key)
 
     # In-place.
@@ -21,6 +21,8 @@ class QuickSort:
         key = key or (lambda a, b: -1 if a < b else 1 if a > b else 0)
         if length < 2:
             return array
+        # pivot_idx = index that is proper place of array[start].
+        # i.e. at this index all elements below are less than array[start] and all above are higher
         pivot_idx = self.partition(array, start, length, key)
         left_len = pivot_idx - start
         right_len = length - (left_len + 1)
@@ -34,15 +36,16 @@ class QuickSort:
     def partition(self, array, start, length, key=None):
         key = key or (lambda a, b: -1 if a < b else 1 if a > b else 0)
         pivot_idx = start
-        pivot = array[pivot_idx]
         for idx in range((start + 1), (start + length)):
-            if key(pivot, array[idx]) >= 0:
+            if key(array[start], array[idx]) >= 0:
                 array[idx], array[pivot_idx +
                                   1] = array[pivot_idx + 1], array[idx]
                 pivot_idx += 1
+        # At this point pivot_idx will seperate all elements above and below start
+        # So, we place start where it should be in the array
         array[start], array[pivot_idx] = array[pivot_idx], array[start]
         return pivot_idx
 
 
-QuickSort.sort2([2, 4, 345, 23, 3, 3, 45, 3, 6, 3, 6, 346, 456, 6, 6, 6])
+print(QuickSort.sort2([2, 4, 345, 23, 3, 3, 45, 3, 6, 3, 6, 346, 456, 6, 6, 6]))
 # [2, 3, 3, 3, 3, 4, 6, 6, 6, 6, 6, 23, 45, 345, 346, 456]

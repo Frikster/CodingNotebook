@@ -1,4 +1,4 @@
-# IntSet where you know the mac
+# IntSet where you know the max
 class MaxIntSet:
     def __init__(self, max):
         self.store = [False] * max

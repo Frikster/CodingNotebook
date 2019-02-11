@@ -14,7 +14,7 @@
 # 'i'
 import pdb
 class Stack:
-    def __init__(self, store=[]):
+    def __init__(self, store=None):
         self.store = [el for el in store] #NB: Do not just assign to store. This will be one list shared across objects!
 
     def peek(self):
@@ -28,3 +28,6 @@ class Stack:
             
     def push(self, val):
         self.store.append(val)
+
+    def __len__(self):
+        return len(self.store)

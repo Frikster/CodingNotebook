@@ -3,7 +3,7 @@
 # 'pearl' => 'earlpay'
 # 'quick' => 'ickquay'
 def pig_latinify(sentence):
-    return ' '.join(map(lambda word: pig_word(word), sentence.split()))
+    return ' '.join([pig_word(word) for word in sentence.split()])
 
 def pig_word(word):
     vowels = [v for v in 'aeiouAEIOU']

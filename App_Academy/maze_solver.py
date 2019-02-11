@@ -1,4 +1,3 @@
-# From solution given, but gives suboptimal (correct) path
 class MazeSolver:
     def __init__(self):
         self.maze_cache = {}

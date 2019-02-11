@@ -2,7 +2,7 @@
  # that are palindromes, e.g. "cool".symmetric_substrings => ["oo"]
  # Only include substrings of length > 1.
 
-# TODO: Optimize. This is horrendous and can be done in O(n)!
+# Old brute force method
 # def substrings(string):
 #     res = []
 #     for idx in range(len(string)):

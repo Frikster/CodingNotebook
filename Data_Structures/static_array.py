@@ -6,13 +6,13 @@ class StaticArray:
 
     # O(1)
     def __getitem__(self, index):
-        if not 0 < index < len(self):
+        if not 0 <= index < len(self):
             raise IndexError('static array bad index')
         return self._store[index]
 
     # O(1)
     def __setitem__(self, index, value):
-        if not 0 < index < len(self):
+        if not 0 <= index < len(self):
             raise IndexError('static array bad index')
         self._store[index] = value
 

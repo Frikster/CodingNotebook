@@ -8,5 +8,5 @@ def titleize(title):
            title_split[idx] = title_split[idx][0].upper() + word[1:]
     return ' '.join(title_split)
 
-titleize("dfgdfg fdgdfg a and dfgdfg")
+print(titleize("dfgdfg fdgdfg a and dfgdfg"))
 #'Dfgdfg Fdgdfg a and Dfgdfg'

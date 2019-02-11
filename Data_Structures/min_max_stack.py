@@ -3,7 +3,7 @@ import pdb
 
 class MinMaxStack:
     def __init__(self, store=[]):
-        self.store = Stack(store)
+        self.store = Stack([el for el in store])
 
     def peek(self):
         return self.store.peek()
@@ -24,3 +24,6 @@ class MinMaxStack:
 
     def max(self):
         return self.peek()['max'] if self.peek() else float('-inf')
+
+    def __len__(self):
+        return len(self.store)
