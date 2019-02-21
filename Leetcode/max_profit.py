@@ -35,7 +35,7 @@ def maxProfit(self, prices: 'List[int]') -> 'int':
         max_profits = maxSubArray(profits)
         return max_profits if max_profits > 0 else 0
 
-# Alternative
+# Alternative (I prefer my way)
 def maxProfit2(self, prices: 'List[int]') -> 'int':
     max_profit, min_price = 0, float('inf')
     for price in prices:

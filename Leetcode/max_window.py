@@ -46,7 +46,7 @@ class Solution:
         return s[stored_back:stored_front]
 
 # Alternative (waaay faster)
-    def minWindow(self, s: 'str', t: 'str') -> 'str':
+    def minWindow2(self, s: 'str', t: 'str') -> 'str':
         count = 0
         m = {}
         for c in t:

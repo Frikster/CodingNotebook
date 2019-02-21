@@ -15,8 +15,8 @@
 class NumArray:
     def __init__(self, nums: 'List[int]'):
         self.store = nums
-        self.cache = {}
-        for idx, el in enumerate(nums):
+        self.cache = {} # Interval sums all starting from 0
+        for idx in range(len(nums)):
             if idx-1 in self.cache:
                 self.cache[idx] = self.cache[idx-1] + nums[idx]
             else:

@@ -18,7 +18,7 @@ class Interval:
         self.end = e
 
 class Solution:
-    def merge(self, intervals: 'List[Interval]') -> 'List[Interval]':
+    def merge2(self, intervals: 'List[Interval]') -> 'List[Interval]':
         if not intervals:
             return []
         intervals.sort(key=(lambda interval: [interval.start, interval.end]))
@@ -40,8 +40,8 @@ class Solution:
             return True
         return False
 
-    # Alternative:
-    def merge2(self, intervals):
+    # Better Alternative. Study this instead:
+    def merge(self, intervals):
         out = []
         for interval in sorted(intervals, key=lambda interval: interval.start):
             if out and interval.start <= out[-1].end:
