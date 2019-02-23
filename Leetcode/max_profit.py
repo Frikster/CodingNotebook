@@ -16,7 +16,7 @@
 # Output: 0
 # Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
-def maxProfit(self, prices: 'List[int]') -> 'int':
+def maxProfit2(self, prices: 'List[int]') -> 'int':
         if len(prices) < 2:
             return 0
         profits = []
@@ -35,8 +35,8 @@ def maxProfit(self, prices: 'List[int]') -> 'int':
         max_profits = maxSubArray(profits)
         return max_profits if max_profits > 0 else 0
 
-# Alternative (I prefer my way)
-def maxProfit2(self, prices: 'List[int]') -> 'int':
+# Alternative (I prefer my way but probably should do it this way)
+def maxProfit(self, prices: 'List[int]') -> 'int':
     max_profit, min_price = 0, float('inf')
     for price in prices:
         min_price = min(min_price, price)

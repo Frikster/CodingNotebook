@@ -21,29 +21,29 @@ class Solution:
         #         counter_hash[char] += 1
         #     else:
         #         counter_hash[char] = 1
-        front, back = 0, 0
-        stored_front, stored_back = float('inf'), float('-inf')
+        left, right = 0, 0
+        stored_left, stored_right = 0, len(s)
         uniq_counter = 0
 
-        while front < len(s):
-            if s[front] in counter_hash:
-                if counter_hash[s[front]] == 1:
+        while left < len(s):
+            if s[left] in counter_hash:
+                if counter_hash[s[left]] == 1:
                     uniq_counter += 1
-                counter_hash[s[front]] -= 1
-            front += 1
+                counter_hash[s[left]] -= 1
+            left += 1
             while uniq_counter >= len(set(t)):
-                if front - back < stored_front - stored_back:
-                    stored_front = front
-                    stored_back = back
-                if s[back] in counter_hash:
-                    if counter_hash[s[back]] == 0:
+                if left - right < stored_left - stored_right:
+                    stored_left = left
+                    stored_right = right
+                if s[right] in counter_hash:
+                    if counter_hash[s[right]] == 0:
                         uniq_counter -= 1
-                    counter_hash[s[back]] += 1
-                back += 1
+                    counter_hash[s[right]] += 1
+                right += 1
 
-        if stored_front == float('inf') or stored_back == float('-inf'):
+        if stored_left == float('inf') or stored_right == float('-inf'):
             return ""
-        return s[stored_back:stored_front]
+        return s[stored_right:stored_left]
 
 # Alternative (waaay faster)
     def minWindow2(self, s: 'str', t: 'str') -> 'str':
