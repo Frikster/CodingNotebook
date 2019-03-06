@@ -17,18 +17,12 @@
 # The number of tasks is in the range[1, 10000].
 # The integer n is in the range[0, 100].
 
-
-# For next time: The trick is that Python does not have a max heap queue, so we must make every number negative when we throw it into the heap.
-# Create a priorityQueue of numbers where the numbers are the amount of a particular task. Pop greedily taking the biggest number (most duplicated task) first
-# heap = []
-# heapq.heappush(heap, el)
-# heapq.heappop(heap)
+# Alternative solutions:
 # https://leetcode.com/problems/task-scheduler/discuss/104528/Python-solution-Max-Heap-Queue-easier-than-Awice's
-# Or possibly this one: https://leetcode.com/problems/task-scheduler/discuss/130786/Python-solution-with-detailed-explanation
+# https://leetcode.com/problems/task-scheduler/discuss/130786/Python-solution-with-detailed-explanation
 
 import heapq
 from collections import Counter
-
 
 class Solution:
         def leastInterval(self, tasks: 'List[str]', n: 'int') -> 'int':
@@ -46,6 +40,7 @@ class Solution:
                 res += 1
                 # print((num, task))
                 uniq_tasks.append((num, task))
+                # Note it is n+1 as we need n unique intervals BETWEEN a task and another that is identical to it (i.e. excluding the task itself)
                 if len(uniq_tasks) == n+1 or (not heap and uniq_tasks):
                     for (num, task) in uniq_tasks:
                         num += 1
