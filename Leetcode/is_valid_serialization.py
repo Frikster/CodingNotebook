@@ -30,9 +30,9 @@
 
 class Solution:
     def isValidSerialization(self, preorder: str) -> bool:
-        p = preorder.split(',')
+        preorder = preorder.split(',')
         stack = []
-        for s in p:
+        for s in preorder:
             stack.append(s)
             while len(stack) > 1 and stack[-1] == '#' and stack[-2] == '#':
                 stack.pop()

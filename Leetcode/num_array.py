@@ -14,8 +14,7 @@
 
 class NumArray:
     def __init__(self, nums: 'List[int]'):
-        self.store = nums
-        self.cache = {} # Interval sums all starting from 0
+        self.cache = {}
         for idx in range(len(nums)):
             if idx-1 in self.cache:
                 self.cache[idx] = self.cache[idx-1] + nums[idx]
@@ -23,7 +22,9 @@ class NumArray:
                 self.cache[idx] = nums[idx]
 
     def sumRange(self, i: 'int', j: 'int') -> 'int':
-        return self.cache[j] - self.cache[i] + self.store[i]
+        if i == 0:
+            return self.cache[j]
+        return self.cache[j] - self.cache[i-1]
 
 # Your NumArray object will be instantiated and called as such:
 # obj = NumArray(nums)
