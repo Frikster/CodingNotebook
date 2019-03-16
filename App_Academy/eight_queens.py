@@ -10,11 +10,13 @@
 # My solution used 3 method parameters: current_row, taken_columns, and
 # positions so far
 
-# TODO: Grok eight-queens
+# TODO: Grok eight-queens. Your problem might have been that you used =[] in the paramaters
 # also works and don't get it:
 GRID_SIZE = 8
 
-def place_queens(row=0, columns=[], results=[]):
+def place_queens(row=0, columns=None, results=None):
+    if columns is None: columns = []
+    if results is None: results = []
     if not columns:
         columns = ["_"] * 8
     if row == GRID_SIZE:

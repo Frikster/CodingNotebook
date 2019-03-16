@@ -16,6 +16,7 @@
 # [1, 1, 1, 1, 5, 5, 10], [1, 1, 1, 1, 10, 10]]
 
 import pdb
+# TODO: this solution doesn't work for cases like 6249, [186, 419, 83, 408]
 
 # Top-down: simply modify to return the array with the fewest coins if that is what you desire
 class MakeChange:
@@ -61,7 +62,7 @@ def make_better_change_cache_builder(value, coins, idx=0):
                     cache[(value, idx)].append(combo + [coin])  
                 # Also consider the case where no prior coins are used   
                 # You have to check if this is already in the cache because for instance
-                # It might have been added when the value was the same but for a priod idx
+                # It might have been added when the value was the same but for a prior idx
                 # when the coin at the prior idx couldn't be used 
                 if branches * coin == value and not [coin]*branches in cache[(value, idx)]:
                     cache[(value, idx)].append([coin]*branches)
@@ -129,16 +130,21 @@ def make_change(value, coins):
 
 
 # Iterative works:
-print(make_better_change_better(24, [1, 5, 10, 25]))
-print(make_better_change_better(24, [10, 7, 1]))
-print(make_better_change_better(25, [10, 7, 1]))
-print(make_better_change_better(25, [10, 8, 7, 1]))
+# print(make_better_change_better(24, [1, 5, 10, 25]))
+# print(make_better_change_better(24, [10, 7, 1]))
+# print(make_better_change_better(25, [10, 7, 1]))
+# print(make_better_change_better(25, [10, 8, 7, 1]))
+# TODO: seems incorrect for this case (should return 20 combos)
+print(len(make_better_change_better(6249, [186, 419, 83, 408])))
+
 
 # Recursive works:
-print(MakeChange().make_better_change_better(24, [1, 5, 10, 25]))
-print(MakeChange().make_better_change_better(24, [1, 7, 10]))
-print(MakeChange().make_better_change_better(25, [10, 7, 1]))
-print(MakeChange().make_better_change_better(25, [10, 8, 7, 1]))
+# print(MakeChange().make_better_change_better(24, [1, 5, 10, 25]))
+# print(MakeChange().make_better_change_better(24, [1, 7, 10]))
+# print(MakeChange().make_better_change_better(25, [10, 7, 1]))
+# print(MakeChange().make_better_change_better(25, [10, 8, 7, 1]))
+# TODO: seems incorrect for this case (should return 20 combos)
+print(len(MakeChange().make_better_change_better(6249, [186, 419, 83, 408])))
 
 
 # print(len(make_better_change(24, [1, 5, 10, 25])))

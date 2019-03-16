@@ -12,6 +12,7 @@
 
 # def symmetric_substrings(string):
 #     return [substr for substr in substrings(string) if list(reversed(substr)) == list(substr)]
+# TODO simplify to this: https://leetcode.com/problems/longest-palindromic-substring/discuss/2954/Python-easy-to-understand-solution-with-comments-(from-middle-to-two-ends).
 import pdb
 
 def symmetric_substrings(string):
