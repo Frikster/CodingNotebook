@@ -28,6 +28,8 @@
 # Input: "9,#,#,1"
 # Output: false
 
+# TODO: redo without a stack and without recursion
+
 class Solution:
     def isValidSerialization(self, preorder: str) -> bool:
         preorder = preorder.split(',')

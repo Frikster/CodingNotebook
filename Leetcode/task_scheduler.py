@@ -21,6 +21,8 @@
 # https://leetcode.com/problems/task-scheduler/discuss/104528/Python-solution-Max-Heap-Queue-easier-than-Awice's
 # https://leetcode.com/problems/task-scheduler/discuss/130786/Python-solution-with-detailed-explanation
 
+# TODO: redo but use the sorting approach (look at the Java solution on Leetcode)
+
 import heapq
 from collections import Counter
 
