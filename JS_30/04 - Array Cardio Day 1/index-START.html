@@ -31,28 +31,51 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    console.log(inventors.filter(inventor => 1500 <= inventor.year && inventor.year < 1600))
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    console.log(inventors.map(inventor => ({first: inventor.first, last: inventor.last})))
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    console.log(inventors.sort(function(a,b){
+      if(a.year < b.year) return -1
+      if (a.year < b.year) return 1
+      return 0
+    }))
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    console.log(inventors.reduce((acc,el) => acc += (el.passed - el.year), 0))
 
     // 5. Sort the inventors by years lived
+    console.log(inventors.sort((a, b) => {
+        if (a.passed - a.year < b.passed - b.year) return -1
+        if (a.passed - a.year > b.passed - b.year) return 1
+        return 0
+      }))
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    // Below code should work in console of linked site
+    boulevardNodes = document.querySelectorAll('.mw-category-group li')
+    boulevards = Array.from(boulevardNodes);
+    boulevards.map(boulevard => boulevard.innerText).filter(boulevard => boulevard.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    console.log(inventors.sort((a, b) => (a.last < b.last ? -1 : 1)));
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    console.log(data.reduce((acc,el) => {
+      el in acc ? acc[el]++ : acc[el] = 0;
+      return acc;
+    }, {}));
+
 
   </script>
 </body>
