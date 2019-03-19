@@ -70,12 +70,12 @@
     audio.currentTime = 0;
     audio.play();
     key.classList.add('playing');
-
-    setTimeout(function() {
-      key.classList.remove('playing');
-    }, 500);
+    // Can use this if you want the removal to take a different length of time than adding:
+    // setTimeout(function() {
+    //   key.classList.remove('playing');
+    // }, 500);
   }
-
+  console.log(this.dataset)
   window.addEventListener('keydown', playSound);
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
