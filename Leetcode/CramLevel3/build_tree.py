@@ -1,11 +1,11 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
-# TODO: redo; you don't yet get this question.
+# TODO: redo. Hint: do it recusrively when whiteboarding.
 # Try doing it iteratively. You actually had the right idea:
 
 # 1. Keep pushing the nodes from the preorder into a stack (and keep making the tree by adding nodes to the left of the previous node) until the top of the stack matches the inorder.
