@@ -1,3 +1,4 @@
+# TODO: better prime factorization: https://codility.com/media/train/9-Sieve.pdf
 # Write a recursive function that returns the prime factorization of
 # a given number. Assume num > 1
 #
