@@ -1,4 +1,5 @@
 // lesson 7: Cover "Manhattan skyline" using the minimum number of rectangles.
+// TODO: Redo with while loops only (Osman method - cleaner, possibly)
 
 function solution(H) {
     let heightStack = [H[0]];
