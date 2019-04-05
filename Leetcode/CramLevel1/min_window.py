@@ -39,40 +39,32 @@ class Solution:
             return ""
         return s[store[0]:store[1]]  
 
-# Alternative (waaay faster)
-    def minWindow2(self, s: 'str', t: 'str') -> 'str':
-        count = 0
-        m = {}
-        for c in t:
-            if c not in m:
-                count += 1
-                m[c] = 0
-            m[c] += 1
+# TEMPLATE
+# int findSubstring(string s){
+#     vector < int > map(128, 0)
+#     int counter
+#     // check whether the substring is valid
+#     int begin = 0, end = 0
+#     // two pointers, one point to tail and one  head
+#     int d
+#     // the length of substring
 
-        start = 0
-        size = len(s)
-        ansLen = size + 1
-        ans = ''
-        for end in range(size):
-            if s[end] not in m:
-                continue
-            m[s[end]] -= 1
-            if m[s[end]] == 0:
-                count -= 1
+#         for() { / * initialize the hash map here * / }
 
-            while count == 0:
-                if end - start + 1 < ansLen:
-                    ansLen = end-start+1
-                    ans = s[start:end+1]
-                startC = s[start]
-                start += 1
-                if startC not in m:
-                    continue
-                m[startC] += 1
-                if m[startC] == 1:
-                    count += 1
-                    break
+#     while(end < s.size()){
 
-        if ansLen == size + 1:
-            return ''
-        return ans
+#             if(map[s[end++]]-- ?){ / * modify counter here * / }
+
+#             while(/* counter condition * /){
+
+#                 / * update d here if finding minimum substring*/
+
+#                 // increase begin to make it invalid/valid again
+
+#                 if(map[s[begin++]]++ ?){/ *modify counter here*/ }
+#             }
+
+#             / * update d here if finding maximum substring*/
+#     }
+#     return d
+# }
