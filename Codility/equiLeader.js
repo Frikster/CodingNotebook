@@ -12,6 +12,7 @@ function solution(A) {
   let rightLeaderCount = counter[leader];
   let res = 0;
   for (let i = 0; i < A.length; i++) {
+    // If there is a leader that appears in >50% of the whole array this is the only element that can result in an equileader
     if (A[i] === leader) {
       leftLeaderCount++;
       rightLeaderCount--;
