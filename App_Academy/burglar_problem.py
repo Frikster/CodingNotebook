@@ -1,7 +1,9 @@
 # Like this https://leetcode.com/problems/house-robber/ except return the solution sets
 def rob(nums):
     if not nums: return 0
-    dp_sets = [[[]]] * (len(nums)+1)
+    # NB: below IS DANGEROUS because then all nested lists have SAME REFERENCE, add to one you change them all.
+    # dp_sets = [[]] * (len(nums)+1)
+    dp_sets = [[[]] for _ in range(len(nums)+1)]
     dp_sets[1] = [[nums[0]]]
     dp = dp = [0] * (len(nums)+1)
     dp[1] = nums[0]
