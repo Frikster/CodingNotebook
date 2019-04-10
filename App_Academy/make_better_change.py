@@ -1,3 +1,5 @@
+# Dont bother solving this anymore. Rather grok coin_change.py
+
 # make better change problem from class
 # make_better_change(24, [10,7,1]) should return [10,7,7]
 # make change with the fewest number of coins
@@ -16,7 +18,7 @@
 # [1, 1, 1, 1, 5, 5, 10], [1, 1, 1, 1, 10, 10]]
 
 import pdb
-# TODO: this solution doesn't work for cases like 6249, [186, 419, 83, 408]
+# : this solution doesn't work for cases like 6249, [186, 419, 83, 408]
 
 # Top-down: simply modify to return the array with the fewest coins if that is what you desire
 class MakeChange:
@@ -134,7 +136,7 @@ def make_change(value, coins):
 # print(make_better_change_better(24, [10, 7, 1]))
 # print(make_better_change_better(25, [10, 7, 1]))
 # print(make_better_change_better(25, [10, 8, 7, 1]))
-# TODO: seems incorrect for this case (should return 20 combos)
+# : seems incorrect for this case (should return 20 combos)
 print(len(make_better_change_better(6249, [186, 419, 83, 408])))
 
 
@@ -143,7 +145,7 @@ print(len(make_better_change_better(6249, [186, 419, 83, 408])))
 # print(MakeChange().make_better_change_better(24, [1, 7, 10]))
 # print(MakeChange().make_better_change_better(25, [10, 7, 1]))
 # print(MakeChange().make_better_change_better(25, [10, 8, 7, 1]))
-# TODO: seems incorrect for this case (should return 20 combos)
+# : seems incorrect for this case (should return 20 combos)
 print(len(MakeChange().make_better_change_better(6249, [186, 419, 83, 408])))
 
 
