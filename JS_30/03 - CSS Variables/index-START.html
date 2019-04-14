@@ -21,10 +21,25 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    h1 {
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
+    
 
     body {
       text-align: center;
@@ -44,7 +59,21 @@
     }
   </style>
 
-  <script>
+  <script>  
+  //TODO: ask Ethan why this no works
+      function handleUpdate(e) {
+        console.log(this.dataset.sizing)
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + suffix)
+      }
+      handleUpdate = handleUpdate.bind(this); 
+
+    document.querySelectorAll(".controls input").forEach(el => {
+      el.addEventListener("mousemove", (e) => handleUpdate(e));
+    });
+
+
+
   </script>
 
 </body>
