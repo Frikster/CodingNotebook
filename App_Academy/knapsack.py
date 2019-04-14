@@ -5,6 +5,28 @@
 #   should return [(1,10),(2,4)] as the best possible set of items
 #   **Duplicates are not allowed** - - that is, you can only include a particular item once.
 
+# TODO: whiteboard the bottom-up approach
+def knapsack_max_value(weight_values, capacity):
+    dp = [0] * (capacity + 1)
+    dp_set = [[]] * (capacity + 1)
+    for cap in range(1,len(dp)):
+        weight_values_possible = [wv for wv in weight_values if wv[0] <= cap]
+        max_val = 0
+        for weight, value in weight_values_possible:
+            if not (weight, value) in dp_set[cap-weight] and value + dp[cap-weight] > max_val: #and sum([wv[1] for wv in dp_set[cap-weight]]) <= cap-weight:
+                max_val = value + dp[cap-weight]
+                dp[cap] = max_val
+                dp_set[cap] = dp_set[cap-weight] + [(weight, value)]
+            elif value > max_val:
+                max_val = value
+                dp[cap] = max_val
+                dp_set[cap] = [(weight, value)]
+        dp[cap] = max(dp[cap], dp[cap-1])
+        print(dp)
+        print(dp_set)
+    return dp[-1]
+
+
 # Top-down - gives the weight-value pairs chosen. Simply iterate through returned values to get total value
 class Knapsack:
     def __init__(self):
@@ -66,12 +88,17 @@ def knapsack_table(weight_values, capacity):
     return solution_table
 
 
-print(Knapsack().knapsack([(1,10),(2,4),(3,10),(4,4)], 5))
-print(Knapsack().knapsack([(4, 4), (3, 10), (2, 4), (1, 10)], 5)) 
-print(Knapsack().knapsack([(2, 10), (3, 4), (3, 10), (4, 4)], 7))
-print(Knapsack().knapsack([(4, 4), (3, 10), (3, 4), (2, 10)], 7))
+# print(Knapsack().knapsack([(1,10),(2,4),(3,10),(4,4)], 5))
+# print(Knapsack().knapsack([(4, 4), (3, 10), (2, 4), (1, 10)], 5)) 
+# print(Knapsack().knapsack([(2, 10), (3, 4), (3, 10), (4, 4)], 7))
+# print(Knapsack().knapsack([(4, 4), (3, 10), (3, 4), (2, 10)], 7))
 
-print(knapsack([(1, 10), (2, 4), (3, 10), (4, 4)], 5))
-print(knapsack([(4, 4), (3, 10), (2, 4), (1, 10)], 5))
-print(knapsack([(2, 10), (3, 4), (3, 10), (4, 4)], 7))
-print(knapsack([(4, 4), (3, 10), (3, 4), (2, 10)], 7))
+# print(knapsack([(1, 10), (2, 4), (3, 10), (4, 4)], 5))
+# print(knapsack([(4, 4), (3, 10), (2, 4), (1, 10)], 5))
+# print(knapsack([(2, 10), (3, 4), (3, 10), (4, 4)], 7))
+# print(knapsack([(4, 4), (3, 10), (3, 4), (2, 10)], 7))
+
+# print(knapsack_max_value([(1, 10), (2, 4), (3, 10), (4, 4)], 5))
+# print(knapsack_max_value([(4, 4), (3, 10), (2, 4), (1, 10)], 5))
+# print(knapsack_max_value([(2, 10), (3, 4), (3, 10), (4, 4)], 7))
+print(knapsack_max_value([(4, 4), (3, 10), (3, 4), (2, 10)], 7))
