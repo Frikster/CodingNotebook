@@ -64,7 +64,7 @@
       function handleUpdate(e) {
         console.log(this.dataset.sizing)
         const suffix = this.dataset.sizing || "";
-        document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + suffix)
+        document.documentElement.style.setProperty(`--${e.currentTarget.name}`, e.currentTarget.value + suffix)
       }
       handleUpdate = handleUpdate.bind(this); 
 
