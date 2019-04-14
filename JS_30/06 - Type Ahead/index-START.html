@@ -15,7 +15,33 @@
     </ul>
   </form>
 <script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  const cities = [];
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => cities.push(...data));
+
+  function filterCities(e) {
+    let searchTerm = e.currentTarget.value;
+    let filteredCities = cities.filter(place => place.state.includes(searchTerm) || place.city.includes(searchTerm));
+    
+    let html = filteredCities.map(place => {
+
+      highlightCity = place.city.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
+      highlightState = place.state.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
+      return `
+          <li> 
+            <span class="name">${highlightCity}, ${highlightState}</span>
+            <span class="population">${place.population}</span>
+          </li>
+      `
+    }).join('');
+
+    document.querySelector(".suggestions").innerHTML = html;
+  }
+
+  let searchBar = document.querySelector(".search");
+  searchBar.addEventListener('keyup', (e) => filterCities(e));
 
 </script>
 </body>
