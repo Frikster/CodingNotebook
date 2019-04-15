@@ -96,6 +96,25 @@
   </div>
 
 <script>
+  let checks = Array.from(document.querySelectorAll("input[type=checkbox]"));
+  let prevIdx = checks.length-1;
+
+  function handleClick(e) {
+    if(e.shiftKey) {
+      let idx = checks.findIndex(check => check === e.currentTarget);
+      checks[idx].checked = false;
+      let startIdx = Math.min(idx, prevIdx);
+      let endIdx = Math.max(idx, prevIdx);
+      for(let i = startIdx; i <= endIdx; i++) {
+        checks[i].checked = true;
+      }
+    }
+    prevIdx = checks.findIndex(check => check === e.currentTarget);
+  } 
+  
+  checks.forEach(check => {
+    check.addEventListener("click", (e) => handleClick(e))
+  });
 </script>
 </body>
 </html>
