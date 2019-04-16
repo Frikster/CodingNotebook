@@ -1,0 +1,14 @@
+body {
+    background-color: pink;
+}
+
+#colsContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.col {
+    height: 70vh;
+    width: 30vw;
+    border: solid red 1px;
+}

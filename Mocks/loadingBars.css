@@ -1,0 +1,26 @@
+*{background: pink;}
+
+.loadingBar {
+    background-color: red;
+    height: 20px;
+    width: 50%;
+    background-image: linear-gradient(green, green);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    animation-duration: 1s;
+    
+}
+
+/* .loadingBarAnimating {
+  animation-name: load;
+} */
+
+@keyframes load {
+  from {
+    background-size: 0% 100%;
+  }
+
+  to {
+    background-size: 100% 100%;
+  }
+}
