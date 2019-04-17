@@ -1,4 +1,12 @@
+// Might not be able to remove event listener with => because you are creating new function on the fly
+// This is also why you can add the same event listener multiple times: each goes to a new function (probably what is going on)
+// Less event listeners the better -> combine left/right click into one to reduce code redundancy
+
+// TODO: modify with feedback 
+// Can probably use e.currentTarget vs e.target to minimize eventListeners
+
 function handleSubmit() {
+    `<li>${taskTextInput.value}<span><span><span><li>`;
     let li = document.createElement('li');
     li.innerHTML = `${taskTextInput.value}`;
     let leftSpan = document.createElement('span');
@@ -8,7 +16,7 @@ function handleSubmit() {
     let rightSpan = document.createElement('span');
     rightSpan.className = "moveRight";
     rightSpan.innerHTML = ">>";
-    rightSpan.addEventListener("click", e => handleRightClick(e));
+    rightSpan.addEventListener("click", (e) => handleRightClick(e));
     li.append(leftSpan);
     li.append(rightSpan);
     document.getElementById("colStart").append(li);
