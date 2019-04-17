@@ -28,7 +28,58 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.items) || [];
+
+  function addItem(e) {
+    e.preventDefault();
+    const text = this.querySelector('[name=item]').value;
+    const item = {
+      text,
+      done: false
+    }
+    items.push(item);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+    this.reset();
+  }
+
+  function populateList(plates=[], platesList) {
+    // console.log(platesList)
+    platesList.innerHTML = plates.map((plate,i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : '' }> 
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `
+    }).join('');
+
+    // Dont want to do this since it'll readd event listeners to each element each time a new element is added. 
+    // let checkboxes = document.querySelectorAll(".plates input");
+    // checkboxes.forEach(check => {
+    //   check.addEventListener("click", handleCheckClick)
+    // });
+  }
+
+  // function handleCheckClick() {
+  //   let storedItems = JSON.parse(localStorage.items);
+  //   storedItems[this.dataset.index].done = !storedItems[this.dataset.index].done; //toggle
+  //   localStorage.setItem('items', JSON.stringify(storedItems));
+  // }
+
+  function toggleDone(e) {
+    if(e.target.localName!=="input") return;
+    let checkbox = e.target;
+    // We want to use our items list to make sure it is always in the correct state otherwise if we check and then add the check will not be stored
+    // let storedItems = JSON.parse(localStorage.items);
+    // storedItems[checkbox.dataset.index].done = !storedItems[checkbox.dataset.index].done; //toggle
+    items[checkbox.dataset.index].done = !items[checkbox.dataset.index].done // toggle
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  addItems.addEventListener("submit", addItem);
+  populateList(JSON.parse(localStorage.items), itemsList);
+  itemsList.addEventListener("click", toggleDone);
 
 </script>
 
