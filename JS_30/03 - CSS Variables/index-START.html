@@ -60,19 +60,15 @@
   </style>
 
   <script>  
-  //TODO: ask Ethan why this no works
       function handleUpdate(e) {
-        console.log(this.dataset.sizing)
         const suffix = this.dataset.sizing || "";
         document.documentElement.style.setProperty(`--${e.currentTarget.name}`, e.currentTarget.value + suffix)
       }
-      handleUpdate = handleUpdate.bind(this); 
 
     document.querySelectorAll(".controls input").forEach(el => {
-      el.addEventListener("mousemove", (e) => handleUpdate(e));
+      el.addEventListener("mousemove", handleUpdate);
+      el.addEventListener("change", handleUpdate);
     });
-
-
 
   </script>
 
