@@ -27,8 +27,8 @@
     
     let html = filteredCities.map(place => {
 
-      highlightCity = place.city.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
-      highlightState = place.state.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
+      let highlightCity = place.city.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
+      let highlightState = place.state.replace(searchTerm, `<span class="hl">${searchTerm}</span>`);
       return `
           <li> 
             <span class="name">${highlightCity}, ${highlightState}</span>

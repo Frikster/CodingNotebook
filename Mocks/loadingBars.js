@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", e => {
 
     // Add promise out here
     // and in the handleClick, chain on a promise onto it with a .then. Return the resulting promise.
-    let promise = new Promise(function (resolve, reject) {
+    let promise = new Promise(function (resolve) {
         resolve("Root");
     });
 
