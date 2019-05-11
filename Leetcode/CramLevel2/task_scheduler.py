@@ -26,32 +26,57 @@
 import heapq
 from collections import Counter
 
-class Solution:
-        def leastInterval(self, tasks: 'List[str]', n: 'int') -> 'int':
-            if n == 0:
-                    return len(tasks)
-            counter = Counter(tasks)
-            heap = []
-            for task in counter:
-                heapq.heappush(heap, (-counter[task], task))
 
-            res = 0
-            uniq_tasks = []
-            while heap:
-                (num, task) = heapq.heappop(heap)
+class Solution(object):
+    def leastInterval(self, tasks, n):
+        heap = []
+        for task_count in Counter(tasks).values():
+            heapq.heappush(heap, -task_count)
+
+        res = 0
+        while heap:
+            len_heap = len(heap)
+            task_arr = []
+            for _ in range(min(len(heap), n+1)):
                 res += 1
-                # print((num, task))
-                uniq_tasks.append((num, task))
-                # Note it is n+1 as we need n unique intervals BETWEEN a task and another that is identical to it (i.e. excluding the task itself)
-                if len(uniq_tasks) == n+1 or (not heap and uniq_tasks):
-                    for (num, task) in uniq_tasks:
-                        num += 1
-                        if num:
-                            heapq.heappush(heap, (num, task))
-                    if heap:
-                        res += (n-len(uniq_tasks)+1)  # CPU idling
-                        # print((n-len(uniq_tasks)+1) * '#')
-                    uniq_tasks = []  # reset for the next n unique intervals
-            # print(res)
-            # print('---')
-            return res
+                task_count = heapq.heappop(heap)
+                task_count += 1
+                if task_count:
+                    task_arr.append(task_count)
+            for task_count in task_arr:
+                heapq.heappush(heap, task_count)
+            if heap and len_heap < n+1:
+                res += n - len_heap + 1
+        return res
+
+    def old_leastInterval(self, tasks: 'List[str]', n: 'int') -> 'int':
+        if n == 0:
+                return len(tasks)
+        counter = Counter(tasks)
+        heap = []
+        for task in counter:
+            heapq.heappush(heap, (-counter[task], task))
+
+        res = 0
+        uniq_tasks = []
+        while heap:
+            (num, task) = heapq.heappop(heap)
+            res += 1
+            # print((num, task))
+            uniq_tasks.append((num, task))
+            # Note it is n+1 as we need n unique intervals BETWEEN a task and another that is identical to it (i.e. excluding the task itself)
+            if len(uniq_tasks) == n+1 or (not heap and uniq_tasks):
+                for (num, task) in uniq_tasks:
+                    num += 1
+                    if num:
+                        heapq.heappush(heap, (num, task))
+                if heap:
+                    res += (n-len(uniq_tasks)+1)  # CPU idling
+                    # print((n-len(uniq_tasks)+1) * '#')
+                uniq_tasks = []  # reset for the next n unique intervals
+        # print(res)
+        # print('---')
+        return res
+
+
+
